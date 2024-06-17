@@ -56,6 +56,6 @@ def generate_name(town_data):
 
 
 if __name__ == "__main__":
-    town_data = load_town_data("data/towns.json")
+    town_data = load_town_data("data/fantasy_towns.json")
     for _ in range(10):  # Generate 10 random names
         print(generate_name(town_data))
