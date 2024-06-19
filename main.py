@@ -18,44 +18,49 @@ def weighted_choice(items, weights):
     return items[-1]  # Fallback
 
 
-def generate_name(town_data):
+def generate_name(name_data):
     while True:
         parts = []
 
-        # Select prefix
-        if town_data["weights"][0] > 0:
-            parts.append(
-                weighted_choice(
-                    town_data["prefix"],
-                    [town_data["weights"][0]] * len(town_data["prefix"]),
-                )
-            )
+        # Select prefix based on weight
+        prefix = weighted_choice(name_data["prefix"], name_data["weights"][0])
+        if prefix:
+            parts.append(prefix)
 
-        # Select middle
-        if town_data["weights"][1] > 0:
-            parts.append(
-                weighted_choice(
-                    town_data["middle"],
-                    [town_data["weights"][1]] * len(town_data["middle"]),
-                )
-            )
+        # Select middle based on weight
+        middle = weighted_choice(name_data["middle"], name_data["weights"][1])
+        if middle:
+            parts.append(middle)
 
-        # Select suffix
-        if town_data["weights"][2] > 0:
-            parts.append(
-                weighted_choice(
-                    town_data["suffix"],
-                    [town_data["weights"][2]] * len(town_data["suffix"]),
-                )
-            )
+        # Select suffix based on weight
+        suffix = weighted_choice(name_data["suffix"], name_data["weights"][2])
+        if suffix:
+            parts.append(suffix)
 
         name = "".join(parts)
+        name = name.replace("  ", " ")
 
-        if name not in town_data["forbidden"]:
+        if name and name not in name_data["forbidden"]:
             return name
 
 
+def select_name_type(town_data):
+    types = list(town_data["types"].keys())
+    print("Select the type of name to generate:")
+    for idx, name_type in enumerate(types):
+        print(f"{idx + 1}. {name_type().title()}")
+
+    choice = int(input("Enter the number of your choice: ")) - 1
+    if 0 <= choice < len(types):
+        return types[choice]
+    else:
+        print("Invalid choice. Please try again.")
+        return select_name_type(town_data)
+
+
 if __name__ == "__main__":
-    town_data = load_town_data("data/fantasy_towns.json")
+    town_data = load_town_data("data/towns.json")
+    name_type = select_name_type(town_data)
+    name_data = town_data["types"][name_type]
     for _ in range(10):  # Generate 10 random names
         print(generate_name(town_data))
