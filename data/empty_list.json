@@ -1,19 +1,43 @@
 {
-    "weights": [
-        0,
-        0,
-        0
-    ],
-    "prefix": [
-        "If you can read this something is wrong."
-    ],
-    "middle": [
-        "If you can read this something is wrong."
-    ],
-    "suffix": [
-        "If you can read this something is wrong."
-    ],
-    "forbidden": [
-        ""
-    ]
+    "_comment": "name is how the list will be precented in the list. weights can be anything between 1 and 0.",
+    "types": {
+        "name one": {
+            "weights": [
+                1,
+                1,
+                0
+            ],
+            "prefix": [
+                "Barrow"
+            ],
+            "middle": [
+                "barrow"
+            ],
+            "suffix": [
+                " If you can read this something is wrong."
+            ],
+            "forbidden": [
+                "Barrowbarrow"
+            ]
+        },
+        "name two": {
+            "weights": [
+                1,
+                1,
+                1
+            ],
+            "prefix": [
+                "Wreck"
+            ],
+            "middle": [
+                "fall"
+            ],
+            "suffix": [
+                "ville"
+            ],
+            "forbidden": [
+                "Wreckfallville"
+            ]
+        }
+    }
 }
