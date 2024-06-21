@@ -1,5 +1,6 @@
 import json
 import random
+import os
 
 
 def load_town_data(filename):
@@ -60,8 +61,34 @@ def select_name_type(town_data):
         return select_name_type(town_data)
 
 
+def select_json_file(data_directory):
+    files = [f for f in os.listdir(data_directory) if f.endswith(".json")]
+    descriptions = []
+
+    for filename in files:
+        filepath = os.path.join(data_directory, filename)
+        data = load_town_data(filepath)
+        descriptions.append(data.get("description", "No description"))
+
+    print("Select the JSON file to load:")
+    for idx, desc in enumerate(descriptions):
+        print(f"{idx + 1}. {desc}")
+
+    choice = int(input("Enter the number of your choice: ")) - 1
+    if 0 <= choice < len(files):
+        return os.path.join(data_directory, files[choice])
+    else:
+        print("Invalid choice. Please try again.")
+        return select_json_file(data_directory)
+
+
 if __name__ == "__main__":
-    town_data = load_town_data("data/towns.json")
+    data_directory = "./data"
+    selected_file = select_json_file(data_directory)
+
+    town_data = load_town_data(selected_file)
+    print(f"Loaded: {town_data['description']}")
+
     name_type = select_name_type(town_data)
     name_data = town_data["types"][name_type]
 

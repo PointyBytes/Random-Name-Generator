@@ -1,0 +1,33 @@
+{
+    "description": "Your Description Here",
+    "types": {
+        "your_type": {
+            "weights": [
+                0.5,
+                0.5,
+                0.5
+            ],
+            "prefix": [
+                "Your",
+                "List",
+                "Of",
+                "Prefixes"
+            ],
+            "middle": [
+                "Your",
+                "List",
+                "Of",
+                "Middles"
+            ],
+            "suffix": [
+                "Your",
+                "List",
+                "Of",
+                "Suffixes"
+            ],
+            "forbidden": [
+                "ListOfForbiddenNames"
+            ]
+        }
+    }
+}
