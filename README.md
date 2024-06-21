@@ -23,6 +23,7 @@ To add a new set of name data for the name generator, follow these steps:
 }
 ```
 
+3. Save the file with a descriptive name, such as `fantasy_names.json` or `sci-fi_names.json`.
 
 
 ## License
